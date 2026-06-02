@@ -3,15 +3,27 @@
     <div class="col-8 offset-2">
 <body>
     <h1>Add Your Property</h1>
-    <form method="POST" action="/listing">
+    <form method="POST" action="/listing" novalidate class="needs-validation">
         <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" name="listing[title]" class="form-control" placeholder="Enter your Property title">
+        <input type="text" required name="listing[title]" class="form-control" placeholder="Enter your Property title">
+        <div class="invalid-feedback">
+            Property should be valid
+        </div>
+        <div class="valid-feedback">
+            Title Looks Good!
+        </div>
         </div>
         <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="listing[description]" class="form-control" placeholder="Enter your Description"></textarea>
+        <textarea required name="listing[description]" class="form-control" placeholder="Enter your Description"></textarea>
+        <div class="invalid-feedback">
+            Description should be valid!!
+        </div> 
+        <div class="valid-feedback">
+            Description Looks Good!
         </div>
+    </div>
         <div class="mb-3">
         <label for="image" class="form-label">Image Link</label>
         <input name="listing[image][url]" type="text" class="form-control" placeholder="Enter your IMAGE URL">
@@ -19,17 +31,35 @@
         <div class="row">
             <div class="mb-3 col-md-4">
                 <label for="price" class="form-label">Price</label>
-                <input type="number" name="listing[price]" class="form-control" placeholder="Enter Price">
+                <input required type="number" name="listing[price]" class="form-control" placeholder="Enter Price">
+                <div class="invalid-feedback">
+                    Price should be valid!!
                 </div>
+                <div class="valid-feedback">
+                    Price Looks Good!
+                </div>    
+            </div>
             <div class="mb-3 col-md-8">
                 <label for="country" class="form-label">Country</label>
-                <input type="text" name="listing[country]" class="form-control" placeholder="Enter your Property Country">
-                </div>
+                <input required type="text" name="listing[country]" class="form-control" placeholder="Enter your Property Country">
+                <div class="invalid-feedback">
+                    Country name should be valid!
+                </div> 
+                <div class="valid-feedback">
+                    Country is valid!
+                </div>    
+            </div>
         </div>
         <div class="mb-3">
         <label for="location" class="form-label">Location</label>
-        <input type="text" name="listing[location]" class="form-control" placeholder="Enter your Property location">
+        <input type="text" required name="listing[location]" class="form-control" placeholder="Enter your Property location">
+        <div class="invalid-feedback">
+            Location should be valid!!
+        </div> 
+        <div class="valid-feedback">
+            Location is valid.
         </div>
+    </div>
         <div class="mb-3 mt-3">
         <button type="submit" class="btn">Add</button>
     </div>

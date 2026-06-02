@@ -1,31 +1,31 @@
-const express=require('express')
-const app=express()
-const Listing=require('./models/listing.js');
-const path =require('path')
-const methodOverride=require('method-override');
-const ejsMate=require('ejs-mate')
+const express = require('express')
+const app = express()
+const Listing = require('./models/listing.js');
+const path = require('path')
+const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate')
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname,"views"))
-app.use(express.urlencoded({extended:true}))
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, "views"))
+app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"));
-app.use(express.static(path.join(__dirname,'/public')))
+app.use(express.static(path.join(__dirname, '/public')))
 
-app.engine("ejs",ejsMate);
+app.engine("ejs", ejsMate);
 
-const mongoose=require('mongoose')
+const mongoose = require('mongoose')
 
-const PORT=8080;
+const PORT = 8080;
 
-MONGODB_URL="mongodb://localhost:27017/hotels"
+MONGODB_URL = "mongodb://localhost:27017/hotels"
 
 main()
-.then((res)=>{
-    console.log('Connected to DB');
-})
-.catch((err)=>{
-    console.log('Connecttion Errorr',err);
-})
+    .then((res) => {
+        console.log('Connected to DB');
+    })
+    .catch((err) => {
+        console.log('Connecttion Errorr', err);
+    })
 
 
 async function main() {
@@ -34,51 +34,51 @@ async function main() {
 
 
 //Index Route
-app.get('/listing',async (req,res)=>{
-    let allListings=await Listing.find({});
-    res.render('listings/index.ejs',{allListings})
+app.get('/listing', async (req, res) => {
+    let allListings = await Listing.find({});
+    res.render('listings/index.ejs', { allListings })
 })
 
 //New listing FORM route
-app.get('/listing/new',(req,res)=>{
+app.get('/listing/new', (req, res) => {
     res.render('listings/new.ejs')
 })
 
 //Show Route
-app.get('/listing/:id',async (req,res) => {
-    let {id}=req.params;
-    const listing=await Listing.findById(id);
-    res.render('listings/show.ejs',{listing})
+app.get('/listing/:id', async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render('listings/show.ejs', { listing })
 })
 
 //New Listing is added 
-app.post('/listing',async (req,res) => {
-    const newListing=await new Listing(req.body.listing)
+app.post('/listing', async (req, res) => {
+    const newListing = await new Listing(req.body.listing)
     newListing.save();
     console.log(newListing);
     res.redirect('/listing')
 })
 
 //Listing Update Form
-app.get('/listing/:id/edit',async(req,res)=>{
-        let {id}=req.params;
-        const listing=await Listing.findById(id);
-        res.render('listings/edit.ejs',{listing})
+app.get('/listing/:id/edit', async (req, res) => {
+    let { id } = req.params;
+    const listing = await Listing.findById(id);
+    res.render('listings/edit.ejs', { listing })
 })
 
 //Edit Route and Save
-app.put('/listing/:id',async (req,res) => {
-    let {id}=req.params;
-    await Listing.findByIdAndUpdate(id,{...req.body.listing});
+app.put('/listing/:id', async (req, res) => {
+    let { id } = req.params;
+    await Listing.findByIdAndUpdate(id, { ...req.body.listing });
     res.redirect(`/listing/${id}`);
 })
 
 
 //delets GET request
-app.delete('/listing/:id',async (req,res) => {
-    let {id}=req.params;
-    let deletedListing= await Listing.findByIdAndDelete(id);
-    console.log('Listing Deleted',deletedListing);
+app.delete('/listing/:id', async (req, res) => {
+    let { id } = req.params;
+    let deletedListing = await Listing.findByIdAndDelete(id);
+    console.log('Listing Deleted', deletedListing);
     res.redirect('/listing');
 })
 
@@ -97,10 +97,10 @@ app.delete('/listing/:id',async (req,res) => {
 //         res.send('Successful Testing')
 // })
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send('Server working')
 })
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`Server running on localhost:8080`);
 })
