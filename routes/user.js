@@ -34,7 +34,7 @@ router.get('/login',(req,res)=>{
 router.post('/login',
     passport.authenticate('local',{failureRedirect:'/login',failureFlash:true}),async(req,res)=>{
         req.flash("success",`Welcome ${req.user.username}`);
-        res.redirect("/listing");
+        res.redirect(req.session.redirectUrl);
 })
 
 router.get('/logout',(req,res)=>{
