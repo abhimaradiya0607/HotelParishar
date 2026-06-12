@@ -19,14 +19,15 @@ async function main() {
 }
 
 const initDB= async()=>{
-    await Listing.deleteMany({});
-    initData.data=initData.data.map((obj)=>({
-        ...obj,
-        owner:"6a26af3fa4c25e8c678fe50c",
-    }))
+    // await Listing.deleteMany({});
+    // initData.data=initData.data.map((obj)=>({
+    //     ...obj,
+    //     owner:"6a26af3fa4c25e8c678fe50c",
+    // }))
 
-    await Listing.insertMany(initData.data)
-    console.log('Data Was initilized');
+    // await Listing.insertMany(initData.data)
+    // console.log('Data Was initilized');
+    await Listing.deleteOne({ _id:"6a2c3a3f11af2f0c5826845b" });
 };
 
 initDB();
