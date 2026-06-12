@@ -15,6 +15,9 @@
       <div class="show-card-wrapper">
         <img src="<%=listing.image.url%>" class="show-main-img" onerror="this.src='/images/default-img.jpg';">
         <div class="show-details">
+          <p class="show-description">
+            Owned By <b><i><%=listing.owner.username%></i></b>
+          </p>
           <p class="show-description"><%=listing.description%></p>
           <div class="show-meta">
             <span class="show-price">&#8377;<%=listing.price.toLocaleString("en-IN")%> <span class="per-night">/ night</span></span>
